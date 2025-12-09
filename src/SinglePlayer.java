@@ -5,7 +5,13 @@ public class SinglePlayer{
     private GameRules rules = new GameRules();
     private int diceCount = 0;
 
+    public void startGame() {
+        while (player.getPosition() != Constants.WINNING_POSITION) {
+            playTurn();
+        }
 
+        System.out.println("Game Over! Dice rolled " + diceCount + " times.");
+    }
 
     private void playTurn() {
         int roll = dice.roll();
@@ -27,8 +33,10 @@ public class SinglePlayer{
         }
 
 
+        if (player.getPosition() > Constants.WINNING_POSITION)
+            player.updatePosition(-roll);
+
         System.out.println("Dice: " + roll + " | Option: " + option +
                 " | Position: " + player.getPosition());
     }
 }
-
